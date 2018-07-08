@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SharedCode", "SharedCode", "{FD842838-A4F9-48FB-93FA-1436827519C0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libmpc.net", "libmpc.net", "{4EFF7CCB-E9AF-4113-A5B3-958297C1464F}"
+	ProjectSection(SolutionItems) = preProject
+		SharedCode\libmpc.net\Enum.cs = SharedCode\libmpc.net\Enum.cs
+		SharedCode\libmpc.net\Exception.cs = SharedCode\libmpc.net\Exception.cs
+		SharedCode\libmpc.net\Mpc.cs = SharedCode\libmpc.net\Mpc.cs
+		SharedCode\libmpc.net\MpcConnection.cs = SharedCode\libmpc.net\MpcConnection.cs
+		SharedCode\libmpc.net\MpdDirectoryListing.cs = SharedCode\libmpc.net\MpdDirectoryListing.cs
+		SharedCode\libmpc.net\MpdFile.cs = SharedCode\libmpc.net\MpdFile.cs
+		SharedCode\libmpc.net\MpdOutput.cs = SharedCode\libmpc.net\MpdOutput.cs
+		SharedCode\libmpc.net\MpdResponse.cs = SharedCode\libmpc.net\MpdResponse.cs
+		SharedCode\libmpc.net\MpdStatistics.cs = SharedCode\libmpc.net\MpdStatistics.cs
+		SharedCode\libmpc.net\MpdStatus.cs = SharedCode\libmpc.net\MpdStatus.cs
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "libmpc.net", "libmpc.net\libmpc.net.csproj", "{91A5912D-0D64-4D28-AFAA-5439C09B7C9C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "libmpc.net.nd", "libmpc.net.nd\libmpc.net.nd.csproj", "{FDDF2E05-560C-4BAA-BEAC-59E26827DA24}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{91A5912D-0D64-4D28-AFAA-5439C09B7C9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91A5912D-0D64-4D28-AFAA-5439C09B7C9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91A5912D-0D64-4D28-AFAA-5439C09B7C9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91A5912D-0D64-4D28-AFAA-5439C09B7C9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDDF2E05-560C-4BAA-BEAC-59E26827DA24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDDF2E05-560C-4BAA-BEAC-59E26827DA24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDDF2E05-560C-4BAA-BEAC-59E26827DA24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDDF2E05-560C-4BAA-BEAC-59E26827DA24}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4EFF7CCB-E9AF-4113-A5B3-958297C1464F} = {FD842838-A4F9-48FB-93FA-1436827519C0}
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = libmpc.net\libmpc.net.csproj
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
