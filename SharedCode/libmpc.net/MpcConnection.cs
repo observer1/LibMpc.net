@@ -39,6 +39,7 @@ namespace Libmpc
 	/// </summary>
 	public class MpcConnection
 	{
+		private object connLock = new object();
 		/// <summary>
 		/// Is fired when a connection to a MPD server is established.
 		/// </summary>
@@ -124,51 +125,51 @@ namespace Libmpc
 		/// <exception cref="InvalidOperationException">If no IPEndPoint was set to the Server property.</exception>
 		public void Connect()
 		{
-			if (this.ipEndPoint == null)
-				throw new InvalidOperationException("Server IPEndPoint not set.");
+				if (this.ipEndPoint == null)
+					throw new InvalidOperationException("Server IPEndPoint not set.");
 
-			if (this.Connected)
-				throw new AlreadyConnectedException();
+				if (this.Connected)
+					throw new AlreadyConnectedException();
 
-			this.tcpClient = new TcpClient(
-				this.ipEndPoint.Address.ToString(), 
-				this.ipEndPoint.Port);
-			this.networkStream = this.tcpClient.GetStream();
+				this.tcpClient = new TcpClient(
+					this.ipEndPoint.Address.ToString(), 
+					this.ipEndPoint.Port);
+				this.networkStream = this.tcpClient.GetStream();
 
-			this.reader = new StreamReader(this.networkStream, Encoding.UTF8);
-			this.writer = new StreamWriter(this.networkStream, new UTF8Encoding(false));
-			this.writer.NewLine = "\n";
+				this.reader = new StreamReader(this.networkStream, Encoding.UTF8);
+				this.writer = new StreamWriter(this.networkStream, new UTF8Encoding(false));
+				this.writer.NewLine = "\n";
 
-			string firstLine = this.reader.ReadLine();
-			if( !firstLine.StartsWith( FIRST_LINE_PREFIX ) )
-			{
-				this.Disconnect();
-				throw new InvalidDataException("Response of mpd does not start with \"" + FIRST_LINE_PREFIX + "\"." );
-			}
-			this.version = firstLine.Substring(FIRST_LINE_PREFIX.Length);
+				string firstLine = this.reader.ReadLine();
+				if( !firstLine.StartsWith( FIRST_LINE_PREFIX ) )
+				{
+					this.Disconnect();
+					throw new InvalidDataException("Response of mpd does not start with \"" + FIRST_LINE_PREFIX + "\"." );
+				}
+				this.version = firstLine.Substring(FIRST_LINE_PREFIX.Length);
 
-			//this.writer.WriteLine();
-			//this.writer.Flush();
+				//this.writer.WriteLine();
+				//this.writer.Flush();
 
-			//this.readResponse();
+				//this.readResponse();
 
-			if( this.OnConnected != null )
-				this.OnConnected.Invoke( this );
+				if( this.OnConnected != null )
+					this.OnConnected.Invoke( this );
 		}
 		/// <summary>
 		/// Disconnects from the current MPD server.
 		/// </summary>
 		public void Disconnect()
 		{
-			if (this.tcpClient == null)
-				return;
+				if (this.tcpClient == null)
+					return;
 
-			this.networkStream.Close();
+				this.networkStream.Close();
 
-			this.ClearConnectionFields();
+				this.ClearConnectionFields();
 
-			if( this.OnDisconnected != null )
-				this.OnDisconnected.Invoke( this );
+				if( this.OnDisconnected != null )
+					this.OnDisconnected.Invoke( this );
 		}
 		/// <summary>
 		/// Executes a simple command without arguments on the MPD server and returns the response.
@@ -178,27 +179,31 @@ namespace Libmpc
 		/// <exception cref="ArgumentException">If the command contains a space of a newline charakter.</exception>
 		public MpdResponse Exec(string command)
 		{
-			if (command == null)
-				throw new ArgumentNullException("command");
-			if (command.Contains(" "))
-				throw new ArgumentException("command contains space");
-			if (command.Contains("\n"))
-				throw new ArgumentException("command contains newline");
-
-			this.CheckConnected();
-
-			try
+			lock (connLock)
 			{
-				this.writer.WriteLine(command);
-				this.writer.Flush();
+				if (command == null)
+					throw new ArgumentNullException("command");
+				if (command.Contains(" "))
+					throw new ArgumentException("command contains space");
+				if (command.Contains("\n"))
+					throw new ArgumentException("command contains newline");
 
-				return this.readResponse();
-			}
-			catch (Exception)
-			{
-				try { this.Disconnect(); }
-				catch (Exception) { }
-				throw;
+				this.CheckConnected();
+
+				try
+				{
+					this.writer.WriteLine(command);
+					this.writer.Flush();
+
+					return this.readResponse();
+				}
+				catch (Exception)
+				{
+					try { this.Disconnect(); }
+					catch (Exception) { }
+					throw;
+				}
+				
 			}
 		}
 		/// <summary>
@@ -210,42 +215,44 @@ namespace Libmpc
 		/// <exception cref="ArgumentException">If the command contains a space of a newline charakter.</exception>
 		public MpdResponse Exec(string command, string[] argument)
 		{
-			if (command == null)
-				throw new ArgumentNullException("command");
-			if (command.Contains(" "))
-				throw new ArgumentException("command contains space");
-			if (command.Contains("\n"))
-				throw new ArgumentException("command contains newline");
+			lock(connLock) {
+				if (command == null)
+					throw new ArgumentNullException("command");
+				if (command.Contains(" "))
+					throw new ArgumentException("command contains space");
+				if (command.Contains("\n"))
+					throw new ArgumentException("command contains newline");
 
-			if (argument == null)
-				throw new ArgumentNullException("argument");
-			for (int i = 0; i < argument.Length; i++)
-			{
-				if (argument[i] == null)
-					throw new ArgumentNullException("argument[" + i + "]");
-				if (argument[i].Contains("\n"))
-					throw new ArgumentException("argument[" + i + "] contains newline");
-			}
-
-			this.CheckConnected();
-
-			try
-			{
-				this.writer.Write(command);
-				foreach (string arg in argument)
+				if (argument == null)
+					throw new ArgumentNullException("argument");
+				for (int i = 0; i < argument.Length; i++)
 				{
-					this.writer.Write(' ');
-					this.WriteToken(arg);
+					if (argument[i] == null)
+						throw new ArgumentNullException("argument[" + i + "]");
+					if (argument[i].Contains("\n"))
+						throw new ArgumentException("argument[" + i + "] contains newline");
 				}
-				this.writer.WriteLine();
-				this.writer.Flush();
 
-				return this.readResponse();
-			}
-			catch (Exception)
-			{
-				try { this.Disconnect(); } catch (Exception) { }
-				throw;
+				this.CheckConnected();
+
+				try
+				{
+					this.writer.Write(command);
+					foreach (string arg in argument)
+					{
+						this.writer.Write(' ');
+						this.WriteToken(arg);
+					}
+					this.writer.WriteLine();
+					this.writer.Flush();
+
+					return this.readResponse();
+				}
+				catch (Exception)
+				{
+					try { this.Disconnect(); } catch (Exception) { }
+					throw;
+				}
 			}
 		}
 
