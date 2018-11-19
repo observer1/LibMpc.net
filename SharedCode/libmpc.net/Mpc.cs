@@ -454,6 +454,18 @@ namespace Libmpc
                 throw new MpdResponseException(response.ErrorCode, response.ErrorMessage);
         }
         /// <summary>
+        /// Deletes the tracks with the given start and end index from the current playlist.
+        /// </summary>
+        /// <param name="start">The start index of the track to remove from the playlist.</param>
+        /// <param name="end">The exclusive end index of the track to remove from the playlist.</param>
+        public void Delete(int start, int end)
+        {
+            MpdResponse response = this.getConnection().Exec("delete", new string[] { start.ToString() + ":" + end.ToString() });
+
+            if (response.IsError)
+                throw new MpdResponseException(response.ErrorCode, response.ErrorMessage);
+        }
+        /// <summary>
         /// Deletes the track with the given id from the current playlist.
         /// </summary>
         /// <param name="id">The id of the track to remove from the playlist.</param>
