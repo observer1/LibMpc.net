@@ -33,7 +33,7 @@ namespace Libmpc
         private const string OK = "OK";
         private const string ACK = "ACK";
 
-        private static readonly Regex LINE_REGEX = new Regex("^(?<key>[A-Za-z]*):[ ]{0,1}(?<value>.*)$");
+        private static readonly Regex LINE_REGEX = new Regex("^(?<key>[A-Za-z_]*):[ ]{0,1}(?<value>.*)$");
 
         private readonly bool isError;
         private readonly int errorCode;
