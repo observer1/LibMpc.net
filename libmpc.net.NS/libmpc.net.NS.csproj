@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>libmpc.net</RootNamespace>
+    <AssemblyName>libmpc.net</AssemblyName>
+  </PropertyGroup>
+
+  <Import Project="..\libmpc.net.Shared\libmpc.net.Shared.projitems" Label="Shared" />
+
+</Project>

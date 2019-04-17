@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "libmpc.net.nd", "libmpc.net
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "libmpc.net.Shared", "libmpc.net.Shared\libmpc.net.Shared.shproj", "{AA7E44DC-A66B-4BA3-97D5-CCE4E8B040BD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "libmpc.net.NS", "libmpc.net.NS\libmpc.net.NS.csproj", "{BE81BE55-E825-442F-82C6-299D8BAEEEE4}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		libmpc.net.Shared\libmpc.net.Shared.projitems*{91a5912d-0d64-4d28-afaa-5439c09b7c9c}*SharedItemsImports = 4
@@ -28,6 +30,10 @@ Global
 		{FDDF2E05-560C-4BAA-BEAC-59E26827DA24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FDDF2E05-560C-4BAA-BEAC-59E26827DA24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FDDF2E05-560C-4BAA-BEAC-59E26827DA24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE81BE55-E825-442F-82C6-299D8BAEEEE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE81BE55-E825-442F-82C6-299D8BAEEEE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE81BE55-E825-442F-82C6-299D8BAEEEE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE81BE55-E825-442F-82C6-299D8BAEEEE4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
