@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -44,36 +44,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Resources\Resource.designer.cs" />
-    <Compile Include="..\SharedCode\libmpc.net\Enum.cs">
-      <Link>Enum.cs</Link>
-    </Compile>
-    <Compile Include="..\SharedCode\libmpc.net\Exception.cs">
-      <Link>Exception.cs</Link>
-    </Compile>
-    <Compile Include="..\SharedCode\libmpc.net\Mpc.cs">
-      <Link>Mpc.cs</Link>
-    </Compile>
-    <Compile Include="..\SharedCode\libmpc.net\MpcConnection.cs">
-      <Link>MpcConnection.cs</Link>
-    </Compile>
-    <Compile Include="..\SharedCode\libmpc.net\MpdDirectoryListing.cs">
-      <Link>MpdDirectoryListing.cs</Link>
-    </Compile>
-    <Compile Include="..\SharedCode\libmpc.net\MpdFile.cs">
-      <Link>MpdFile.cs</Link>
-    </Compile>
-    <Compile Include="..\SharedCode\libmpc.net\MpdOutput.cs">
-      <Link>MpdOutput.cs</Link>
-    </Compile>
-    <Compile Include="..\SharedCode\libmpc.net\MpdResponse.cs">
-      <Link>MpdResponse.cs</Link>
-    </Compile>
-    <Compile Include="..\SharedCode\libmpc.net\MpdStatistics.cs">
-      <Link>MpdStatistics.cs</Link>
-    </Compile>
-    <Compile Include="..\SharedCode\libmpc.net\MpdStatus.cs">
-      <Link>MpdStatus.cs</Link>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -81,5 +51,6 @@
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
   </ItemGroup>
+  <Import Project="..\libmpc.net.Shared\libmpc.net.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
 </Project>

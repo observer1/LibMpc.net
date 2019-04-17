@@ -40,38 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\SharedCode\libmpc.net\Enum.cs">
-      <Link>Enum.cs</Link>
-    </Compile>
-    <Compile Include="..\SharedCode\libmpc.net\Exception.cs">
-      <Link>Exception.cs</Link>
-    </Compile>
-    <Compile Include="..\SharedCode\libmpc.net\Mpc.cs">
-      <Link>Mpc.cs</Link>
-    </Compile>
-    <Compile Include="..\SharedCode\libmpc.net\MpcConnection.cs">
-      <Link>MpcConnection.cs</Link>
-    </Compile>
-    <Compile Include="..\SharedCode\libmpc.net\MpdDirectoryListing.cs">
-      <Link>MpdDirectoryListing.cs</Link>
-    </Compile>
-    <Compile Include="..\SharedCode\libmpc.net\MpdFile.cs">
-      <Link>MpdFile.cs</Link>
-    </Compile>
-    <Compile Include="..\SharedCode\libmpc.net\MpdOutput.cs">
-      <Link>MpdOutput.cs</Link>
-    </Compile>
-    <Compile Include="..\SharedCode\libmpc.net\MpdResponse.cs">
-      <Link>MpdResponse.cs</Link>
-    </Compile>
-    <Compile Include="..\SharedCode\libmpc.net\MpdStatistics.cs">
-      <Link>MpdStatistics.cs</Link>
-    </Compile>
-    <Compile Include="..\SharedCode\libmpc.net\MpdStatus.cs">
-      <Link>MpdStatus.cs</Link>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <Import Project="..\libmpc.net.Shared\libmpc.net.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
